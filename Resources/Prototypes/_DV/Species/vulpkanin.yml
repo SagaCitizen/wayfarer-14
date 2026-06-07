@@ -42,84 +42,98 @@
 
 - type: humanoidBaseSprite
   id: MobVulpkaninHead
+  hidden: true
   baseSprite:
     sprite: _DV/Mobs/Species/Vulpkanin/parts.rsi
     state: head_m
 
 - type: humanoidBaseSprite
   id: MobVulpkaninHeadMale
+  hidden: true
   baseSprite:
     sprite: _DV/Mobs/Species/Vulpkanin/parts.rsi
     state: head_m
 
 - type: humanoidBaseSprite
   id: MobVulpkaninHeadFemale
+  hidden: true
   baseSprite:
     sprite: _DV/Mobs/Species/Vulpkanin/parts.rsi
     state: head_f
 
 - type: humanoidBaseSprite
   id: MobVulpkaninTorso
+  hidden: true
   baseSprite:
     sprite: _DV/Mobs/Species/Vulpkanin/parts.rsi
     state: torso_m
 
 - type: humanoidBaseSprite
   id: MobVulpkaninTorsoMale
+  hidden: true
   baseSprite:
     sprite: _DV/Mobs/Species/Vulpkanin/parts.rsi
     state: torso_m
 
 - type: humanoidBaseSprite
   id: MobVulpkaninTorsoFemale
+  hidden: true
   baseSprite:
     sprite: _DV/Mobs/Species/Vulpkanin/parts.rsi
     state: torso_f
 
 - type: humanoidBaseSprite
   id: MobVulpkaninLLeg
+  hidden: true
   baseSprite:
     sprite: _DV/Mobs/Species/Vulpkanin/parts.rsi
     state: l_leg
 
 - type: humanoidBaseSprite
   id: MobVulpkaninLHand
+  hidden: true
   baseSprite:
     sprite: _DV/Mobs/Species/Vulpkanin/parts.rsi
     state: l_hand
 
 - type: humanoidBaseSprite
   id: MobVulpkaninLArm
+  hidden: true
   baseSprite:
     sprite: _DV/Mobs/Species/Vulpkanin/parts.rsi
     state: l_arm
 
 - type: humanoidBaseSprite
   id: MobVulpkaninLFoot
+  hidden: true
   baseSprite:
     sprite: _DV/Mobs/Species/Vulpkanin/parts.rsi
     state: l_foot
 
 - type: humanoidBaseSprite
   id: MobVulpkaninRLeg
+  hidden: true
   baseSprite:
     sprite: _DV/Mobs/Species/Vulpkanin/parts.rsi
     state: r_leg
 
 - type: humanoidBaseSprite
   id: MobVulpkaninRHand
+  hidden: true
   baseSprite:
     sprite: _DV/Mobs/Species/Vulpkanin/parts.rsi
     state: r_hand
 
 - type: humanoidBaseSprite
   id: MobVulpkaninRArm
+  hidden: true
   baseSprite:
     sprite: _DV/Mobs/Species/Vulpkanin/parts.rsi
     state: r_arm
 
 - type: humanoidBaseSprite
   id: MobVulpkaninRFoot
+  hidden: true
   baseSprite:
     sprite: _DV/Mobs/Species/Vulpkanin/parts.rsi
     state: r_foot

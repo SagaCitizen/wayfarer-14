@@ -42,9 +42,26 @@ namespace Content.Shared.Humanoid.Markings
         [DataField("sprites", required: true)]
         public List<SpriteSpecifier> Sprites { get; private set; } = default!;
 
+        /// <summary>
+        /// Digilegs: Additional alternate sprites that override this definition when
+        /// the entity's HumanoidLegStyle is set to something other than Plantigrade.
+        /// You may also want to add altSprites to other layers on this species.
+        /// </summary>
+        [DataField("alternateSprites")]
+        public Dictionary<HumanoidLegStyle, ProtoId<MarkingPrototype>> AlternateSprites { get; private set; } = [];
+
+        /// <summary>
+        /// Digilegs: Hides this marking from the character editor marking list.
+        /// Recommended for use when the marking is selected via other means. For
+        /// example, digileg alternates are hidden because they are selected via the leg
+        /// style toggle, not by selecting them in the editor.
+        /// </summary>
+        [DataField("hidden")]
+        public bool Hidden { get; private set; } = false;
+
         // impstation edit - allow markings to support shaders
-		[DataField("shader")]
-		public string? Shader { get; private set; } = null;
+        [DataField("shader")]
+        public string? Shader { get; private set; } = null;
         // end impstation edit
 
         /// <summary>

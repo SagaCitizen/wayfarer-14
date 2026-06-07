@@ -141,7 +141,28 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
             layer.Color = component.SkinColor.WithAlpha(proto.LayerAlpha);
 
         if (proto.BaseSprite != null)
-            _sprite.LayerSetSprite((entity.Owner, sprite), layerIndex, proto.BaseSprite);
+        {
+            // Digilegs
+            SpriteSpecifier appropriateSprite = proto.BaseSprite;
+            if (component.LegStyle != HumanoidLegStyle.Plantigrade
+                && proto.AltSprites.Count > 0)
+            {
+                // If the Entity's leg style isn't Plantigrade, we try to find its leg style in the
+                // list of alternates. If that doesn't exist, we fall back to digitigrade. If
+                // neither is available, we fall through to the base sprite.
+                if (proto.AltSprites.TryGetValue(component.LegStyle, out SpriteSpecifier? altSprite))
+                {
+                    appropriateSprite = altSprite;
+                }
+                else if (component.LegStyle != HumanoidLegStyle.Digitigrade
+                         && proto.AltSprites.TryGetValue(HumanoidLegStyle.Digitigrade, out SpriteSpecifier? altPawSprite))
+                {
+                    appropriateSprite = altPawSprite;
+                }
+            }
+            _sprite.LayerSetSprite((entity.Owner, sprite), layerIndex, appropriateSprite);
+            // End Digilegs
+        }
     }
 
     /// <summary>
@@ -262,6 +283,9 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
         humanoid.BaseHeight = profile.Height;
         humanoid.BaseWidth = profile.Width;
         // End Wayfarer
+        // Digilegs
+        humanoid.LegStyle = profile.Appearance.LegStyle;
+        // End Digilegs
 
         UpdateSprite((uid, humanoid, Comp<SpriteComponent>(uid)));
     }
@@ -287,7 +311,19 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
             {
                 if (_markingManager.TryGetMarking(marking, out var markingPrototype))
                 {
-                    ApplyMarking(markingPrototype, marking.MarkingColors, marking.Visible, entity);
+                    // Digilegs
+                    PreModifyMarking(
+                        entity,
+                        markingPrototype,
+                        marking,
+                        out Marking newMarking,
+                        out MarkingPrototype newMarkingPrototype);
+                    ApplyMarking(
+                        newMarkingPrototype,
+                        newMarking.MarkingColors,
+                        newMarking.Visible,
+                        entity);
+                    // End Digilegs
                     if (markingPrototype.BodyPart == HumanoidVisualLayers.UndergarmentTop)
                         applyUndergarmentTop = false;
                     else if (markingPrototype.BodyPart == HumanoidVisualLayers.UndergarmentBottom)
@@ -299,6 +335,36 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
         humanoid.ClientOldMarkings = new MarkingSet(humanoid.MarkingSet);
 
         AddUndergarments(entity, applyUndergarmentTop, applyUndergarmentBottom);
+    }
+
+    /// <summary>
+    /// Digilegs: Replaces a marking with the appropriate alternate sprites depending on the
+    /// Entity's leg style.
+    /// </summary>
+    private void PreModifyMarking(
+        HumanoidAppearanceComponent humanoid,
+        MarkingPrototype markingPrototype,
+        Marking marking,
+        out Marking newMarking,
+        out MarkingPrototype newPrototype
+        )
+    {
+        newMarking = marking;
+        newPrototype = markingPrototype;
+        if (humanoid.LegStyle == HumanoidLegStyle.Plantigrade)
+        {
+            // No need to modify anything for plantigrade legs.
+            return;
+        }
+        // Check if the marking has alternate sprites for the current leg style. If they don't have
+        // that specific leg style, fall back to the digitigrade style. If neither are present, just
+        // pass through the marking.
+        if (markingPrototype.AlternateSprites.TryGetValue(humanoid.LegStyle, out var altMarkingProtoId)
+            || humanoid.LegStyle != HumanoidLegStyle.Digitigrade
+               && markingPrototype.AlternateSprites.TryGetValue(HumanoidLegStyle.Digitigrade, out altMarkingProtoId))
+        {
+            newPrototype = _prototypeManager.Index(altMarkingProtoId);
+        }
     }
 
     private void ClearAllMarkings(Entity<HumanoidAppearanceComponent, SpriteComponent> entity)

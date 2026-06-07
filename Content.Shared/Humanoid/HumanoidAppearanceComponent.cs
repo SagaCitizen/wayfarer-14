@@ -154,6 +154,13 @@ public sealed partial class HumanoidAppearanceComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public float Width = 1f;
+
+    /// <summary>
+    ///     Digilegs: The leg style of this humanoid.
+    ///     - Swaps out the legs, feet, and torso sprites on a given base layer to match the leg style.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public HumanoidLegStyle LegStyle = HumanoidLegStyle.Plantigrade;
 }
 
 [DataDefinition]

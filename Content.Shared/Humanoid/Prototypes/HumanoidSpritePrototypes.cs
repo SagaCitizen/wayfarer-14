@@ -78,4 +78,13 @@ public sealed partial class HumanoidSpeciesSpriteLayer : IPrototype
     /// </summary>
     [DataField]
     public bool ForcedColoring { get; private set; }
+
+    /// <summary>
+    ///     Digilegs: A list of alternative sprites to be used for this layer
+    ///     when different leg styles are selected. Primarily used for legs,
+    ///     feet, and chests. You may also want to add alternateSprites to
+    ///     markings for this species.
+    /// </summary>
+    [DataField("altSprites")]
+    public Dictionary<HumanoidLegStyle, SpriteSpecifier> AltSprites = [];
 }
