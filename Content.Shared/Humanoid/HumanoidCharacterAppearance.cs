@@ -57,37 +57,58 @@ public sealed partial class HumanoidCharacterAppearance : ICharacterAppearance, 
 
     public HumanoidCharacterAppearance WithHairStyleName(string newName)
     {
-        return new(newName, HairColor, FacialHairStyleId, FacialHairColor, EyeColor, SkinColor, Markings);
+        return new HumanoidCharacterAppearance(this)
+        {
+            HairStyleId = newName
+        };
     }
 
     public HumanoidCharacterAppearance WithHairColor(Color newColor)
     {
-        return new(HairStyleId, newColor, FacialHairStyleId, FacialHairColor, EyeColor, SkinColor, Markings);
+        return new HumanoidCharacterAppearance(this)
+        {
+            HairColor = newColor
+        };
     }
 
     public HumanoidCharacterAppearance WithFacialHairStyleName(string newName)
     {
-        return new(HairStyleId, HairColor, newName, FacialHairColor, EyeColor, SkinColor, Markings);
+        return new HumanoidCharacterAppearance(this)
+        {
+            FacialHairStyleId = newName
+        };
     }
 
     public HumanoidCharacterAppearance WithFacialHairColor(Color newColor)
     {
-        return new(HairStyleId, HairColor, FacialHairStyleId, newColor, EyeColor, SkinColor, Markings);
+        return new HumanoidCharacterAppearance(this)
+        {
+            FacialHairColor = newColor
+        };
     }
 
     public HumanoidCharacterAppearance WithEyeColor(Color newColor)
     {
-        return new(HairStyleId, HairColor, FacialHairStyleId, FacialHairColor, newColor, SkinColor, Markings);
+        return new HumanoidCharacterAppearance(this)
+        {
+            EyeColor = newColor
+        };
     }
 
     public HumanoidCharacterAppearance WithSkinColor(Color newColor)
     {
-        return new(HairStyleId, HairColor, FacialHairStyleId, FacialHairColor, EyeColor, newColor, Markings);
+        return new HumanoidCharacterAppearance(this)
+        {
+            SkinColor = newColor
+        };
     }
 
     public HumanoidCharacterAppearance WithMarkings(List<Marking> newMarkings)
     {
-        return new(HairStyleId, HairColor, FacialHairStyleId, FacialHairColor, EyeColor, SkinColor, newMarkings);
+        return new HumanoidCharacterAppearance(this)
+        {
+            Markings = newMarkings
+        };
     }
 
     public static HumanoidCharacterAppearance DefaultWithSpecies(string species)
