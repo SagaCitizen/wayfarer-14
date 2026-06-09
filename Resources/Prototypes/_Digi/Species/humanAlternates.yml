@@ -1,0 +1,41 @@
+- type: alternateBaseSprites
+  id: humanDigilegsAlternateBaseSprites
+  speciesId: human
+  specifier: digilegs
+  displacementId: LegDisplacementDigitigrade
+  alternateLayerSprites:
+    - humanDigilegsAlternateTorsoFemale
+  alternateMarkingSprites:
+    - digilegsAlternateMarkingVulpTail
+
+# TODO: Can we make a datatype that's just "base: alternate:" so we don't need
+# to do this crap?
+- type: alternateBaseSprite
+  id: humanDigilegsAlternateTorsoFemale
+  baseSpriteId: MobHumanTorsoFemale
+  alternateSpriteId: MobHumanTorsoFemaleDigi
+
+- type: alternateMarkingSprite
+  id: digilegsAlternateMarkingVulpTail
+  baseMarkingId: VulpTail
+  alternateMarkingId: VulpTailDigi
+
+- type: humanoidBaseSprite
+  id: MobHumanTorsoFemaleDigi
+  baseSprite:
+    sprite: _Digi/Mobs/Species/AltHumanDigi/parts.rsi
+    state: torso_f_digi
+
+- type: marking
+  id: VulpTailDigi
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Vulpkanin, Felinid]
+  kindAllowance: [BasicHumanlike, BasicFurry, BasicRobot, VoxLike] # Coyote: Allow all markings
+  waggingId: DigiVulpTailWag
+  hidden: true
+  sprites:
+  - sprite: _Digi/Mobs/Customization/digimarkings.rsi/Vulpkanin/tail_markings.rsi
+    state: vulp
+  - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
+    state: vulp-fade

@@ -1,0 +1,32 @@
+# Sets up displacement for clothing on digitigrade-legged non-Ovinia species by
+# stealing Ovinia's displacement maps
+- type: alternateSpriteDisplacement
+  id: LegDisplacementDigitigrade
+  displacements:
+    default:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: _DEN/Mobs/Species/Ovinia/displacement.rsi
+            state: jumpsuit
+      shoes:
+        sizeMaps:
+          32:
+            sprite: _DEN/Mobs/Species/Ovinia/displacement.rsi
+            state: shoes
+      outerClothing:
+        sizeMaps:
+          32:
+            sprite: _DEN/Mobs/Species/Ovinia/displacement.rsi
+            state: outerclothing_hardsuit
+    female:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: _DEN/Mobs/Species/Ovinia/displacement.rsi
+            state: jumpsuit-female
+      shoes:
+        sizeMaps:
+          32:
+            sprite: _DEN/Mobs/Species/Ovinia/displacement.rsi
+            state: shoes
